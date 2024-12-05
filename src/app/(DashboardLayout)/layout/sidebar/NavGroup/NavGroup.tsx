@@ -23,9 +23,7 @@ const NavGroup = ({ item }: ItemType) => {
       padding: '3px 12px',
     }),
   );
-  return (
-    <ListSubheaderStyle>{item.subheader}</ListSubheaderStyle>
-  );
+  return <ListSubheaderStyle>{item.subheader}</ListSubheaderStyle>;
 };
 
 NavGroup.propTypes = {

@@ -1,15 +1,7 @@
-import React from "react";
+import React from 'react';
 // mui imports
-import {
-  ListItemIcon,
-  ListItem,
-  List,
-  styled,
-  ListItemText,
-  useTheme,
-  ListItemButton,
-} from "@mui/material";
-import Link from "next/link";
+import { ListItemIcon, ListItem, List, styled, ListItemText, useTheme, ListItemButton } from '@mui/material';
+import Link from 'next/link';
 
 type NavGroup = {
   [x: string]: any;
@@ -37,24 +29,24 @@ const NavItem = ({ item, level, pathDirect, onClick }: ItemType) => {
 
   const ListItemStyled = styled(ListItem)(() => ({
     padding: 0,
-    ".MuiButtonBase-root": {
-      whiteSpace: "nowrap",
-      marginBottom: "2px",
-      padding: "8px 10px",
-      borderRadius: "8px",
-      backgroundColor: level > 1 ? "transparent !important" : "inherit",
+    '.MuiButtonBase-root': {
+      whiteSpace: 'nowrap',
+      marginBottom: '2px',
+      padding: '8px 10px',
+      borderRadius: '8px',
+      backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
       color: theme.palette.text.secondary,
-      paddingLeft: "10px",
-      "&:hover": {
+      paddingLeft: '10px',
+      '&:hover': {
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.primary.main,
       },
-      "&.Mui-selected": {
-        color: "white",
+      '&.Mui-selected': {
+        color: 'white',
         backgroundColor: theme.palette.primary.main,
-        "&:hover": {
+        '&:hover': {
           backgroundColor: theme.palette.primary.main,
-          color: "white",
+          color: 'white',
         },
       },
     },
@@ -68,14 +60,14 @@ const NavItem = ({ item, level, pathDirect, onClick }: ItemType) => {
           href={item.href}
           disabled={item.disabled}
           selected={pathDirect === item.href}
-          target={item.external ? "_blank" : ""}
+          target={item.external ? '_blank' : ''}
           onClick={onClick}
         >
           <ListItemIcon
             sx={{
-              minWidth: "36px",
-              p: "3px 0",
-              color: "inherit",
+              minWidth: '36px',
+              p: '3px 0',
+              color: 'inherit',
             }}
           >
             {itemIcon}

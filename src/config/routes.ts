@@ -1,3 +1,4 @@
 export const routes = {
-  signIn: '/signin',
+  index: '/',
+  signIn: '/authentication/login',
 };

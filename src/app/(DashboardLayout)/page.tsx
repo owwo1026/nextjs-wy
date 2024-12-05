@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Grid, Box } from '@mui/material';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 // components
@@ -39,7 +39,7 @@ const Dashboard = () => {
         </Grid>
       </Box>
     </PageContainer>
-  )
-}
+  );
+};
 
 export default Dashboard;

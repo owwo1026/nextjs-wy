@@ -1,7 +1,7 @@
-const Loading = () =>{
-    return(
-        <div>Dash Loading</div>
-    )
-}
+import { CircularProgress } from '@mui/material';
+
+const Loading = () => {
+  return <CircularProgress color="inherit" />;
+};
 
 export default Loading;

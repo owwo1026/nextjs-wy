@@ -1,20 +1,28 @@
-import React from 'react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+
+import { getSession } from 'next-auth/react';
+
 // components
 import Profile from './Profile';
 import { IconBellRinging, IconMenu } from '@tabler/icons-react';
 
 interface ItemType {
-  toggleMobileSidebar:  (event: React.MouseEvent<HTMLElement>) => void;
+  toggleMobileSidebar: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Header = ({toggleMobileSidebar}: ItemType) => {
+const Header = ({ toggleMobileSidebar }: ItemType) => {
+  const [sessionInfo, setSessionInfo] = useState({});
 
-  // const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-  // const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
-
+  useEffect(() => {
+    const getSessionInfo = async () => {
+      const session = await getSession();
+      console.log('session', session);
+      setSessionInfo(session || {});
+    };
+    getSessionInfo();
+  }, []);
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
@@ -39,14 +47,13 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
           onClick={toggleMobileSidebar}
           sx={{
             display: {
-              lg: "none",
-              xs: "inline",
+              lg: 'none',
+              xs: 'inline',
             },
           }}
         >
           <IconMenu width="20" height="20" />
         </IconButton>
-
 
         <IconButton
           size="large"
@@ -58,14 +65,13 @@ const Header = ({toggleMobileSidebar}: ItemType) => {
           <Badge variant="dot" color="primary">
             <IconBellRinging size="21" stroke="1.5" />
           </Badge>
-
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button variant="contained" component={Link} href="/authentication/login"   disableElevation color="primary" >
-            Login
-          </Button>
           <Profile />
+          <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="password" mb="5px">
+            {sessionInfo?.user?.name}
+          </Typography>
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

@@ -4,11 +4,9 @@ import PageContainer from '@/app/(DashboardLayout)/components/container/PageCont
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 import BlankCard from '@/app/(DashboardLayout)/components/shared/BlankCard';
 
-
 const TypographyPage = () => {
   return (
     <PageContainer title="Typography" description="this is Typography">
-
       <Grid container spacing={3}>
         <Grid item sm={12}>
           <DashboardCard title="Default Text">
@@ -81,8 +79,7 @@ const TypographyPage = () => {
                 <BlankCard>
                   <CardContent>
                     <Typography variant="subtitle1">
-                      subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis
-                      tenetur
+                      subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
 
                     <Typography variant="body1" color="textSecondary">
@@ -95,8 +92,7 @@ const TypographyPage = () => {
                 <BlankCard>
                   <CardContent>
                     <Typography variant="subtitle2">
-                      subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis
-                      tenetur
+                      subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
 
                     <Typography variant="body1" color="textSecondary">
@@ -135,8 +131,7 @@ const TypographyPage = () => {
                 <BlankCard>
                   <CardContent>
                     <Typography variant="caption">
-                      caption. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis
-                      tenetur
+                      caption. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
 
                     <Typography variant="body1" color="textSecondary">
@@ -149,8 +144,7 @@ const TypographyPage = () => {
                 <BlankCard>
                   <CardContent>
                     <Typography variant="overline">
-                      overline. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis
-                      tenetur
+                      overline. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
 
                     <Typography variant="body1" color="textSecondary">
@@ -160,7 +154,6 @@ const TypographyPage = () => {
                 </BlankCard>
               </Grid>
             </Grid>
-
           </DashboardCard>
         </Grid>
         <Grid item sm={12}>
@@ -260,7 +253,7 @@ const TypographyPage = () => {
             </Grid>
           </DashboardCard>
         </Grid>
-      </Grid >
+      </Grid>
     </PageContainer>
   );
 };

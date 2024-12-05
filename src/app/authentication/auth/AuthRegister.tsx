@@ -1,36 +1,38 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { Stack } from '@mui/system';
-import { useRouter } from "next/navigation";
-import Link  from 'next/link';
-import { signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
-
+import { useLoader } from '@/hooks/use-loader/use-loader';
+import useDialog from '@/hooks/use-dialog';
 
 interface registerType {
-    title?: string;
-    subtitle?: JSX.Element | JSX.Element[];
-    subtext?: JSX.Element | JSX.Element[];
-  }
+  title?: string;
+  subtitle?: JSX.Element | JSX.Element[];
+  subtext?: JSX.Element | JSX.Element[];
+}
 
 type FormValues = {
   name: String;
   email: String;
   password: String;
+  passwordConfirm: String;
 };
 
 const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
   const router = useRouter();
-  // const { openLoader, closeLoader, isLoading } = useLoader();
+  const { openLoader, closeLoader, isLoading } = useLoader();
+  const { errorDialog, successDialog } = useDialog();
 
   const schema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
     email: z.string().email({ message: 'Invalid email address' }),
     password: z.string().min(1, { message: 'Password is required' }),
+    passwordConfirm: z.string().min(1, { message: 'passwordConfirm is required' }),
   });
 
   const {
@@ -43,97 +45,119 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
       name: 'Ariel',
       email: 'owwo1026@gmail.com',
       password: 'a3820512',
+      passwordConfirm: 'a3820512',
     },
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
   });
 
-  const onSubmit = useCallback(
-    async (formValues: any) => {
-      console.log('onSubmit', formValues);
-
-      const result = await signIn("credentials", {
-        callbackUrl: "/",
-        ...formValues,
-        redirect: false,
+  const onSubmit = useCallback(async (formValues: any) => {
+    try {
+      openLoader();
+      const result = await fetch(`/api/register`, {
+        method: 'POST',
+        body: JSON.stringify(formValues),
       });
-      console.log('result', result);
-
-      if (result?.error) {
-        console.log('setError', result?.error);
-        return;
-        // setError("email or password is incorrect");
+      const response = await result.json();
+      if (!result.ok) {
+        throw new Error(response.message);
       }
-
-      // router.push("/");
-    },
-    [],
-  );
+      successDialog('註冊成功', () => {
+        router.push('/authentication/login');
+      });
+    } catch (error) {
+      errorDialog(error);
+    } finally {
+      closeLoader();
+    }
+  }, []);
 
   return (
     <form id="registerForm" onSubmit={handleSubmit(onSubmit)}>
-        {title ? (
-            <Typography fontWeight="700" variant="h2" mb={1}>
-                {title}
-            </Typography>
-        ) : null}
+      {title ? (
+        <Typography fontWeight="700" variant="h2" mb={1}>
+          {title}
+        </Typography>
+      ) : null}
 
-        {subtext}
+      <Box>
+        <Stack mb={3}>
+          <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="name" mb="5px">
+            姓名
+          </Typography>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field: { value, name, onChange }, fieldState: { error } }) => (
+              <CustomTextField
+                name={name}
+                onChange={onChange}
+                value={value}
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
 
-        <Box>
-            <Stack mb={3}>
-                <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor='name' mb="5px">Name</Typography>
-                <Controller
-                  name="name"
-                  control={control}
-                  render={({ field: { value, name, onChange }, fieldState: { error } }) => (
-                    <CustomTextField
-                      name={name}
-                      onChange={onChange}
-                      value={value}
-                      error={!!error}
-                      helperText={error ? error.message : null}
-                    />
-                  )}
-                />
+          <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="email" mb="5px" mt="25px">
+            電子信箱
+          </Typography>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { value, name, onChange }, fieldState: { error } }) => (
+              <CustomTextField
+                name={name}
+                onChange={onChange}
+                value={value}
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
 
-                <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor='email' mb="5px" mt="25px">Email Address</Typography>
-                <Controller
-                  name="email"
-                  control={control}
-                  render={({ field: { value, name, onChange }, fieldState: { error } }) => (
-                    <CustomTextField
-                      name={name}
-                      onChange={onChange}
-                      value={value}
-                      error={!!error}
-                      helperText={error ? error.message : null}
-                    />
-                  )}
-                />
+          <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="password" mb="5px" mt="25px">
+            密碼
+          </Typography>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { value, name, onChange }, fieldState: { error } }) => (
+              <CustomTextField
+                name={name}
+                onChange={onChange}
+                value={value}
+                type="password"
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
 
-                <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor='password' mb="5px" mt="25px">Password</Typography>
-                <Controller
-                  name="password"
-                  control={control}
-                  render={({ field: { value, name, onChange }, fieldState: { error } }) => (
-                    <CustomTextField
-                      name={name}
-                      onChange={onChange}
-                      value={value}
-                      type="password"
-                      error={!!error}
-                      helperText={error ? error.message : null}
-                    />
-                  )}
-                />
-            </Stack>
-            <Button color="primary" variant="contained" size="large" fullWidth type="submit">
-                Sign Up
-            </Button>
-        </Box>
-        {subtitle}
+          <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="password" mb="5px" mt="25px">
+            密碼確認
+          </Typography>
+          <Controller
+            name="passwordConfirm"
+            control={control}
+            render={({ field: { value, name, onChange }, fieldState: { error } }) => (
+              <CustomTextField
+                name={name}
+                onChange={onChange}
+                value={value}
+                type="password"
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
+        </Stack>
+        <Button color="primary" variant="contained" size="large" fullWidth type="submit">
+          註冊
+        </Button>
+      </Box>
+      {subtitle}
     </form>
-  )
+  );
 };
 
 export default AuthRegister;

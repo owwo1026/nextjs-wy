@@ -1,20 +1,14 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User } from '@prisma/client';
 // import { verifyResetPasswordToken } from "app/service/resetPassword";
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 const saltRounds = 10;
 
-export const get = async ({
-  id,
-  email,
-}: {
-  id?: number;
-  email?: string;
-}): Promise<User> => {
+export const get = async ({ id, email }: { id?: number; email?: string }): Promise<User> => {
   if (!id && !email) {
-    throw new Error("User id or email is required");
+    throw new Error('User id or email is required');
   }
 
   const user = await prisma.user.findUnique({
@@ -26,7 +20,7 @@ export const get = async ({
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   return user;
@@ -58,25 +52,25 @@ export const create = async ({
   }
 
   if (userExists) {
-    throw new Error("User already exists");
+    throw new Error('帳號已存在');
   }
 
   if (!name) {
-    throw new Error("User name is required");
+    throw new Error('姓名必填');
   }
 
   if (!email) {
-    throw new Error("User email is required");
+    throw new Error('電子信箱必填');
   }
 
   if (password && password !== passwordConfirm) {
-    throw new Error("Passwords do not match");
+    throw new Error('密碼不一致');
   }
 
   if (password) {
     bcrypt.hash(password, saltRounds, async function (err, hash) {
       if (err) {
-        throw new Error("Error hashing password");
+        throw new Error('密碼加密錯誤');
       }
 
       await prisma.user.create({
@@ -101,7 +95,7 @@ export const create = async ({
 
 export const remove = async (id: number) => {
   if (!id) {
-    throw new Error("User ID is required");
+    throw new Error('User ID is required');
   }
 
   const user = await prisma.user.findUnique({
@@ -111,7 +105,7 @@ export const remove = async (id: number) => {
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   await prisma.user.update({
@@ -140,7 +134,7 @@ export const update = async ({
   password?: string;
 }) => {
   if (!id) {
-    throw new Error("User ID is required");
+    throw new Error('User ID is required');
   }
 
   const user = await prisma.user.findUnique({
@@ -150,7 +144,7 @@ export const update = async ({
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   await prisma.user.update({

@@ -1,6 +1,6 @@
-import { useMediaQuery, Box, Drawer } from "@mui/material";
-import SidebarItems from "./SidebarItems";
-import { Upgrade } from "./Updrade";
+import { useMediaQuery, Box, Drawer } from '@mui/material';
+import SidebarItems from './SidebarItems';
+import { Upgrade } from './Updrade';
 import { Sidebar, Logo } from 'react-mui-sidebar';
 
 interface ItemType {
@@ -9,27 +9,21 @@ interface ItemType {
   isSidebarOpen: boolean;
 }
 
-const MSidebar = ({
-  isMobileSidebarOpen,
-  onSidebarClose,
-  isSidebarOpen,
-}: ItemType) => {
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
+const MSidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }: ItemType) => {
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
 
-  const sidebarWidth = "270px";
+  const sidebarWidth = '270px';
 
   // Custom CSS for short scrollbar
   const scrollbarStyles = {
     '&::-webkit-scrollbar': {
       width: '7px',
-
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: '#eff2f7',
       borderRadius: '15px',
     },
   };
-
 
   if (lgUp) {
     return (
@@ -48,7 +42,7 @@ const MSidebar = ({
           variant="permanent"
           PaperProps={{
             sx: {
-              boxSizing: "border-box",
+              boxSizing: 'border-box',
               ...scrollbarStyles,
             },
           }}
@@ -58,7 +52,7 @@ const MSidebar = ({
           {/* ------------------------------------------- */}
           <Box
             sx={{
-              height: "100%",
+              height: '100%',
             }}
           >
             <Sidebar
@@ -80,7 +74,7 @@ const MSidebar = ({
                 <SidebarItems />
                 <Upgrade />
               </Box>
-            </Sidebar >
+            </Sidebar>
           </Box>
         </Drawer>
       </Box>
@@ -128,14 +122,8 @@ const MSidebar = ({
       {/* ------------------------------------------- */}
       {/* Sidebar For Mobile */}
       {/* ------------------------------------------- */}
-
     </Drawer>
   );
 };
 
 export default MSidebar;
-
-
-
-
-

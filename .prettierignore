@@ -1,0 +1,17 @@
+*.md
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all HTML files:
+**/*.html
+
+.next
+.cache
+.vercel
+.husky
+node_modules
+pgdata
+pnpm-lock.yaml
+out
+public

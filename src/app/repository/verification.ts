@@ -1,14 +1,14 @@
-import { VerifyToken, verifyToken } from "app/service/verification";
-import { NextResponse } from "next/server";
-import { get, update } from "./user";
+import { VerifyToken, verifyToken } from 'app/service/verification';
+import { NextResponse } from 'next/server';
+import { get, update } from './user';
 
 export const verifyEmailToken = async (token: string) => {
   if (!token) {
     return NextResponse.json(
-      { message: "Token is required" },
+      { message: 'Token is required' },
       {
         status: 400,
-      }
+      },
     );
   }
 

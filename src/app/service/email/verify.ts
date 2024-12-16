@@ -1,4 +1,4 @@
-import VerifyEmail from '@/app/(DashboardLayout)/components/email/Verify';
+import VerifyEmail from '@/app/admin/components/email/Verify';
 import { sendEmail } from '@/app/service/email';
 import { generateVerificationToken } from '@/app/service/verification';
 import { get, update } from '@/app/repository/user';

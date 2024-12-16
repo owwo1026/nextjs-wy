@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import CustomTextField from '@/app/admin/components/forms/theme-elements/CustomTextField';
 import { useLoader } from '@/hooks/use-loader/use-loader';
 import useDialog from '@/hooks/use-dialog';
 

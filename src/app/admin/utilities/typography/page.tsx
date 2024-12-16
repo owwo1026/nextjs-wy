@@ -1,8 +1,8 @@
 'use client';
 import { Typography, Grid, CardContent } from '@mui/material';
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
-import BlankCard from '@/app/(DashboardLayout)/components/shared/BlankCard';
+import PageContainer from '@/app/admin/components/container/PageContainer';
+import DashboardCard from '@/app/admin/components/shared/DashboardCard';
+import BlankCard from '@/app/admin/components/shared/BlankCard';
 
 const TypographyPage = () => {
   return (

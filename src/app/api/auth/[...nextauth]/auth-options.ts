@@ -71,7 +71,11 @@ export const authOptions: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       console.log('CredentialsProvider redirect', url, baseUrl);
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      console.log(
+        'CredentialsProvider redirect return ',
+        url.startsWith(baseUrl) ? url : url.startsWith('/') ? baseUrl + url : baseUrl,
+      );
+      return url.startsWith(baseUrl) ? url : url.startsWith('/') ? baseUrl + url : baseUrl;
     },
     async jwt({ token, user }) {
       console.log('CredentialsProvider token', token, user);

@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/auth/[...nextauth]/auth-provider.js",
-    "src/app/(DashboardLayout)/layout/header/Profile.js"
+    "src/app/admin/layout/header/Profile.js",
+    "src/app/(frontend)/page.js"
   ],
   "exclude": ["node_modules"]
 }

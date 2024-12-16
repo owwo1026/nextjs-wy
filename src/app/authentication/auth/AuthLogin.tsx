@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Typography, FormGroup, FormControlLabel, Button, Checkbox } from '@mui/material';
 
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import CustomTextField from '@/app/admin/components/forms/theme-elements/CustomTextField';
 import { useLoader } from '@/hooks/use-loader/use-loader';
 import useDialog from '@/hooks/use-dialog';
 import { routes } from '@/config/routes';
@@ -53,9 +53,9 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
     try {
       openLoader();
       const result = await signIn('credentials', {
-        callbackUrl: routes.index,
-        ...formValues,
         redirect: false,
+        callbackUrl: routes.admin.index,
+        ...formValues,
       });
       console.log('result', result);
 
@@ -73,7 +73,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
         }
         throw new Error(message);
       } else {
-        router.push('/');
+        router.push(result?.url || routes.admin.index);
       }
     } catch (error) {
       errorDialog(error);

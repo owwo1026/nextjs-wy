@@ -22,6 +22,6 @@ model User {
   password      String?
   is_active     Boolean   @default(false)
   is_deleted    Boolean   @default(false)
-  created_at    DateTime  @default(now())
-  updated_at    DateTime? @updatedAt
+  created_at    DateTime  @default(now()) @db.Timestamp(0) // 这里使用 @db.Timestamp
+  updated_at    DateTime? @updatedAt @db.Timestamp(0)   // 同样适用于更新字段
 }

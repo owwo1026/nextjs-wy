@@ -16,21 +16,18 @@ export const SigninWelcomeEmail = (props: SigninWelcomeEmailProps) => {
             alt="nextjs-authjs-template"
             style={logo}
           />
-          <p style={paragraph}>Hi {firstName},</p>
+          <p style={paragraph}>親愛的 {firstName} 您好:</p>
           <p style={paragraph}>
-            Welcome to the Next.js Auth.js Template!
+            您已成功註冊 {process.env.WEBSITE_NAME} 帳號!
             <br />
-            We{"'"}re thrilled to have you with us!
           </p>
-          <section style={btnContainer}>
-            <a style={button} href="https://github.com/Dannyisadog/nextjs-authjs-template">
-              Get started
-            </a>
-          </section>
+          <br />
+          <br />
+          <p style={paragraph}>如無在此註冊會員，請忽略並刪除此封郵件，謝謝。</p>
           <p style={paragraph}>
             Best,
             <br />
-            Nextjs Authjs Template Team
+            {process.env.WEBSITE_NAME}
           </p>
         </div>
       </body>

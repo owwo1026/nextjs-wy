@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useLoader } from '@/hooks/use-loader/use-loader';
 import useDialog from '@/hooks/use-dialog';
 
@@ -61,7 +61,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
       if (!result.ok) {
         throw new Error(response.message);
       }
-      successDialog('註冊成功', () => {
+      successDialog('註冊成功，請先至電子信箱驗證啟用帳號', () => {
         router.push('/authentication/login');
       });
     } catch (error) {

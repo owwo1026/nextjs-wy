@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ListSubheader, styled, Theme } from '@mui/material';
 
 type NavGroup = {
-  navlabel?: boolean;
+  navLabel?: boolean;
   subheader?: string;
 };
 

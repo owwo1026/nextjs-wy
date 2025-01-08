@@ -10,7 +10,7 @@ interface EmailParams {
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendEmail = async (params: EmailParams): Promise<CreateEmailResponseSuccess | null> => {
-  const { from = 'Next Auth Template <no-reply@wydesign22.com>', to, subject, template } = params;
+  const { from = `${process.env.WEBSITE_NAME} <no-reply@wydesign22.com>`, to, subject, template } = params;
 
   const { data, error } = await resend.emails.send({
     from,

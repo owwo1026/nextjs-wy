@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import AuthProvider from '@/app/api/auth/[...nextauth]/auth-provider';
 import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options';
-import { baselightTheme } from '@/utils/theme/DefaultColors';
+import { baselightTheme } from '@/theme/DefaultColors';
 
 import GlobalLoader from '@/hooks/use-loader/container';
 import GlobalModal from '@/hooks/use-modal/container';
@@ -13,7 +13,6 @@ import '@/app/global.css';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
-  console.log('RootLayout', session);
 
   return (
     <html>

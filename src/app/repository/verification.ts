@@ -1,4 +1,4 @@
-import { VerifyToken, verifyToken } from 'app/service/verification';
+import { VerifyToken, verifyToken } from '@/app/service/verification';
 import { NextResponse } from 'next/server';
 import { get, update } from './user';
 
@@ -20,5 +20,6 @@ export const verifyEmailToken = async (token: string) => {
   await update({
     id: user.id,
     emailVerified: new Date(),
+    isActive: true,
   });
 };

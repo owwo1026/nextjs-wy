@@ -1,10 +1,9 @@
-import VerifyEmail from '@/app/(DashboardLayout)/components/email/Verify';
+import VerifyEmail from '@/components/email/Verify';
 import { sendEmail } from '@/app/service/email';
 import { generateVerificationToken } from '@/app/service/verification';
-import { get, update } from '@/app/repository/user';
 
 export const sendVerificationEmail = async (firstName: string, email: string) => {
-  const subject = 'Verify your email';
+  const subject = '[維域設計後台管理系統]驗證您的信箱帳號';
 
   const token = generateVerificationToken(email);
 

@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Typography, FormGroup, FormControlLabel, Button, Checkbox } from '@mui/material';
 
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
+import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useLoader } from '@/hooks/use-loader/use-loader';
 import useDialog from '@/hooks/use-dialog';
 import { routes } from '@/config/routes';
@@ -28,7 +28,7 @@ type FormValues = {
 
 const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
   const router = useRouter();
-  const { openLoader, closeLoader, isLoading } = useLoader();
+  const { openLoader, closeLoader } = useLoader();
   const { errorDialog, successDialog } = useDialog();
 
   const schema = z.object({
@@ -60,18 +60,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
       console.log('result', result);
 
       if (!result?.ok) {
-        let message;
-        switch (result?.error) {
-          case 'CredentialsSignin':
-            message = '帳號密碼錯誤';
-            break;
-          case 'VerificationFailed':
-            message = '帳號驗證錯誤';
-            break;
-          default:
-            message = '未知的錯誤';
-        }
-        throw new Error(message);
+        throw new Error(result.error);
       } else {
         router.push('/');
       }

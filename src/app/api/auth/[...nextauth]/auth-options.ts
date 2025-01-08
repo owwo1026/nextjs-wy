@@ -9,9 +9,7 @@ import bcrypt from 'bcryptjs';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient, User as PrismaUser } from '@prisma/client';
 
-import { create as createUser, get as getUser } from '@/app/repository/user';
-// import { sendWelcomeEmail } from "@/app/service/email/welcome";
-// import { sendVerificationEmail } from "@/app/service/email/verify";
+import { get as getUser } from '@/app/repository/user';
 import { routes } from '@/config/routes';
 
 const prisma = new PrismaClient();
@@ -32,7 +30,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session }: any) {
-      console.log('CredentialsProvider session', session);
       const dbUser = await getUser({ email: session.user.email as string });
 
       const newSession = session as unknown as CustomSession;
@@ -40,37 +37,7 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
-    async signIn({ user }) {
-      console.log('CredentialsProvider signIn', user);
-      if (!user) {
-        return false;
-      }
-
-      let userExists = null;
-
-      try {
-        userExists = await getUser({ email: user.email as string });
-      } catch (e) {
-        console.error(e);
-      }
-
-      if (userExists) {
-        return true;
-      }
-
-      await createUser({
-        email: user.email as string,
-        name: user.name as string,
-        image: user.image as string,
-      });
-
-      // sendWelcomeEmail(user.name as string, user.email as string);
-      // sendVerificationEmail(user.name as string, user.email as string);
-
-      return true;
-    },
     async redirect({ url, baseUrl }) {
-      console.log('CredentialsProvider redirect', url, baseUrl);
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     async jwt({ token, user }) {
@@ -112,6 +79,9 @@ export const authOptions: NextAuthOptions = {
         const match = await bcrypt.compare(password as string, user.password);
 
         if (match) {
+          if (user.is_active === false) {
+            throw new Error('帳號尚未啟用，請至電子信箱中驗證帳號');
+          }
           return user as unknown as User;
         }
 

@@ -18,21 +18,21 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
             alt="nextjs-authjs-template"
             style={logo}
           />
-          <p style={paragraph}>Hi {firstName},</p>
+          <p style={paragraph}>親愛的 {firstName} 您好:</p>
           <p style={paragraph}>
-            Welcome to the Next.js Auth.js Template!
+            您已成功註冊 {process.env.WEBSITE_NAME} 帳號!
             <br />
-            Please verify your email by clicking the button below.
+            請盡快至以下網址驗證，以完成註冊並啟用帳號。
           </p>
           <section style={btnContainer}>
-            <a style={button} href={`${url}/verification?token=${token}`}>
-              Verify email
+            <a style={button} href={`${url}/authentication/verification?token=${token}`}>
+              驗證電子信箱
             </a>
           </section>
           <p style={paragraph}>
             Best,
             <br />
-            Next.js Authentication Template Team
+            {process.env.WEBSITE_NAME}
           </p>
         </div>
       </body>

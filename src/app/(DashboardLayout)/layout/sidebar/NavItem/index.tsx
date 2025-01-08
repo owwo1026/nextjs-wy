@@ -6,7 +6,7 @@ import Link from 'next/link';
 type NavGroup = {
   [x: string]: any;
   id?: string;
-  navlabel?: boolean;
+  navLabel?: boolean;
   subheader?: string;
   title?: string;
   icon?: any;

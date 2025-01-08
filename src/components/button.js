@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@mui/material';
-import cn from '@/utils/class-names';
+import cn from '@/utils/className';
 
 export default function TbsButton({ colorType = 'default', className, children, ...props }) {
   const customClasses = {

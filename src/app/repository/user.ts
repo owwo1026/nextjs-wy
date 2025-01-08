@@ -20,15 +20,17 @@ export const get = async ({ id, email }: { id?: number; email?: string }): Promi
   });
 
   if (!user) {
-    throw new Error('User not found');
+    throw new Error('查無帳號');
   }
 
   return user;
 };
+
 export const list = async (): Promise<User[]> => {
   const users = await prisma.user.findMany();
   return users;
 };
+
 export const create = async ({
   name,
   email,
@@ -125,6 +127,7 @@ export const update = async ({
   image,
   emailVerified,
   password,
+  isActive,
 }: {
   id: number;
   name?: string;
@@ -132,6 +135,7 @@ export const update = async ({
   image?: string;
   emailVerified?: Date;
   password?: string;
+  isActive?: boolean;
 }) => {
   if (!id) {
     throw new Error('User ID is required');
@@ -155,8 +159,9 @@ export const update = async ({
       name,
       email,
       image,
-      emailVerified,
+      email_verified: emailVerified,
       password,
+      is_active: isActive,
     },
   });
 };

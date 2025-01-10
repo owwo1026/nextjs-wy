@@ -1,4 +1,4 @@
-import { IconLayoutDashboard, IconUserPlus } from '@tabler/icons-react';
+import { IconLayoutDashboard, IconUser } from '@tabler/icons-react';
 import { routes } from '@/config/routes';
 
 import { uniqueId } from 'lodash';
@@ -17,8 +17,8 @@ const Menuitems = [
     items: [
       {
         id: uniqueId(),
-        title: '使用者',
-        icon: IconUserPlus,
+        title: '使用者管理',
+        icon: IconUser,
         href: routes.account.user.list,
       },
     ],

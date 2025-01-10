@@ -11,8 +11,7 @@ import { PrismaClient, User as PrismaUser } from '@prisma/client';
 
 import { get as getUser } from '@/app/repository/user';
 import { routes } from '@/config/routes';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/utils/prisma';
 
 export type CustomSession = {
   authUser: PrismaUser;

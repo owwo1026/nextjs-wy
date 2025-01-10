@@ -20,7 +20,7 @@ export enum DATE_FORMAT {
   TIME_HMS = 'HH:mm:ss',
 }
 
-export function formatDate(date?: Date, format: string = 'YYYY/MM/DD'): string {
+export function formatDate(date?: Date, format: string = DATE_FORMAT.DAYJS_SLASH): string {
   if (!date) return '';
   const taiwanTime = dayjs(date).utcOffset('+08:00');
   return taiwanTime.format(format);

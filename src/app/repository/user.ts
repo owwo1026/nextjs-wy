@@ -1,8 +1,7 @@
 import { PrismaClient, User } from '@prisma/client';
 // import { verifyResetPasswordToken } from "app/service/resetPassword";
 import bcrypt from 'bcryptjs';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/utils/prisma';
 
 const saltRounds = 10;
 
